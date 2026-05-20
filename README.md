@@ -1,4 +1,4 @@
-# Wuzi-Chess
+# Gomokards 卡牌五子棋
 
 ## 重构进度
 
