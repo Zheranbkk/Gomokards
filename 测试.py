@@ -91,7 +91,7 @@ def handle_card_click(player_hand, player_turn, player_has_acted, player_color):
         box_height = text_rect.height + padding * 2
 
         if player_color == "white":
-            card_x = GRID_LEFT - 150
+            card_x = GRID_LEFT - 220
             card_y = GRID_TOP + idx * (box_height + 10)
         else:
             card_x = GRID_LEFT + (BOARD_SIZE - 1) * CELL_SIZE + 50
@@ -615,7 +615,7 @@ while running:
         padding = 10
         box_width = text_rect.width + padding * 2
         box_height = text_rect.height + padding * 2
-        card_x = GRID_LEFT - 180
+        card_x = GRID_LEFT - 220
         card_y = GRID_TOP + idx * (box_height + 10)
 
         card_rect = pygame.Rect(card_x, card_y, box_width, box_height)
