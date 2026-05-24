@@ -24,6 +24,15 @@ def test_check_win_blocked_by_barrier():
     assert check_win(board, 5, y, 1, 19, barriers_centers) is False
 
 
+def test_check_win_blocked_by_barrier_diagonal():
+    board = make_board()
+    for i in range(5):
+        board[3 + i][3 + i] = 1
+
+    barriers_centers = [(5, 5)]
+    assert check_win(board, 5, 5, 1, 19, barriers_centers) is False
+
+
 def test_clear_matching_lines_clears_five_in_row():
     board = make_board()
     y = 2

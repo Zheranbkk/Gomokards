@@ -5,19 +5,6 @@ from __future__ import annotations
 from typing import Iterable
 
 
-def ccw(a: tuple[float, float], b: tuple[float, float], c: tuple[float, float]) -> bool:
-    return (c[1] - a[1]) * (b[0] - a[0]) > (b[1] - a[1]) * (c[0] - a[0])
-
-
-def segments_intersect(
-    a: tuple[float, float],
-    b: tuple[float, float],
-    c: tuple[float, float],
-    d: tuple[float, float],
-) -> bool:
-    return ccw(a, c, d) != ccw(b, c, d) and ccw(a, b, c) != ccw(a, b, d)
-
-
 def is_blocked(
     x1: int,
     y1: int,
@@ -25,16 +12,17 @@ def is_blocked(
     y2: int,
     barriers_centers: Iterable[tuple[int, int]],
 ) -> bool:
-    a = (x1 + 0.5, y1 + 0.5)
-    b = (x2 + 0.5, y2 + 0.5)
-
+    segment = frozenset(((x1, y1), (x2, y2)))
     for cx, cy in barriers_centers:
-        h1 = (cx - 0.5, cy + 0.5)
-        h2 = (cx + 1.5, cy + 0.5)
-        v1 = (cx + 0.5, cy - 0.5)
-        v2 = (cx + 0.5, cy + 1.5)
-
-        if segments_intersect(a, b, h1, h2) or segments_intersect(a, b, v1, v2):
+        blocked_segments = {
+            frozenset(((cx, cy), (cx + 1, cy))),
+            frozenset(((cx, cy), (cx, cy + 1))),
+            frozenset(((cx + 1, cy), (cx + 1, cy + 1))),
+            frozenset(((cx, cy + 1), (cx + 1, cy + 1))),
+            frozenset(((cx, cy), (cx + 1, cy + 1))),
+            frozenset(((cx, cy + 1), (cx + 1, cy))),
+        }
+        if segment in blocked_segments:
             return True
 
     return False

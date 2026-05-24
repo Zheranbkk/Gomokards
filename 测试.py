@@ -417,8 +417,8 @@ while running:
                         ny = grid_y + dy
                         if 0 <= nx < BOARD_SIZE and 0 <= ny < BOARD_SIZE:
                             state.barriers.append((nx, ny))
-                        
-                        state.barriers_centers.append((grid_x,grid_y)) # 单独保存中心点
+
+                    state.barriers_centers.append((grid_x, grid_y))  # 单独保存中心点
 
                     # 消耗手牌
                     if state.selected_card_owner == "black":
